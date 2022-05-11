@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1e4a29ff61ebb64098680ed1cce2ccc, type: 3}
+  m_Name: R_SwipeR
+  m_EditorClassIdentifier: 
+  mainTracker: 0
+  concurrentGestures: []
+  functions:
+  - Debug: 0
+    functions:
+    - rid: 2325913733803802625
+    - rid: 2325913733803802626
+  - Debug: 1
+    functions:
+    - rid: 2325913733803802628
+    - rid: 2325913750912106496
+  - Debug: 0
+    functions:
+    - rid: 2325913733803802629
+  mode: 0
+  persistTransition: 1
+  duration: 10
+  state: 3
+  references:
+    version: 2
+    RefIds:
+    - rid: 2325913733803802625
+      type: {class: FeetPose, ns: XR_Gestures, asm: Assembly-CSharp}
+      data:
+        name: 
+        negate: 0
+        observation: 1
+        leftState: 1
+        rightState: 1
+        debugState: True
+    - rid: 2325913733803802626
+      type: {class: VelocityDirection, ns: XR_Gestures, asm: Assembly-CSharp}
+      data:
+        name: 
+        negate: 0
+        correction: 0.1
+        direction: {x: 1, y: 0, z: 0}
+    - rid: 2325913733803802628
+      type: {class: Speed, ns: XR_Gestures, asm: Assembly-CSharp}
+      data:
+        name: 
+        negate: 0
+        minSpeed: 0
+        maxSpeed: 0
+        mode: 0
+        customTracker: 0
+        trackerLabel: 0
+        speed: 2.81
+    - rid: 2325913733803802629
+      type: {class: Speed, ns: XR_Gestures, asm: Assembly-CSharp}
+      data:
+        name: 
+        negate: 0
+        minSpeed: 0
+        maxSpeed: 0
+        mode: 1
+        customTracker: 0
+        trackerLabel: 0
+        speed: 0
+    - rid: 2325913750912106496
+      type: {class: VelocityDirection, ns: XR_Gestures, asm: Assembly-CSharp}
+      data:
+        name: 
+        negate: 0
+        correction: 0.1
+        direction: {x: 1, y: 0, z: 0}

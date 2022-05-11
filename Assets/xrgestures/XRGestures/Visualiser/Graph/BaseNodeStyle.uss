@@ -1,0 +1,11 @@
+﻿.header{
+	font-size: 15px;
+	margin-right: 80px;
+	margin-left: 80px;
+}
+
+.row{
+	display: flex;
+	flex-direction: row;
+}
+

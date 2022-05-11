@@ -1,0 +1,4 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <uie:PropertyField binding-path="functions" label=" " />
+    <ui:ProgressBar title="state" high-value="1" name="state" label=" " style="margin-top: 7px;" />
+</ui:UXML>
