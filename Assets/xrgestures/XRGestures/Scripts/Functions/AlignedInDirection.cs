@@ -18,7 +18,7 @@ namespace XR_Gestures
         [Range(0, 1)]
         [SerializeField] float tolerance;
 
-        public override void OnDebug()
+        public override void DebugRun()
         {
             Debug.DrawLine(from.Position, from.Position + direction.normalized);
             Debug.DrawLine(from.Position, from.Position + GetCurrentDir(), Color.green);

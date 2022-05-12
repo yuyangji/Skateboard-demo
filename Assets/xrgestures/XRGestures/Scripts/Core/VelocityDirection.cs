@@ -21,7 +21,7 @@ namespace XR_Gestures
             direction = direction.normalized;
         }
 
-        public override void OnDebug()
+        public override void DebugRun()
         {
             Debug.DrawLine(tracker.Position, tracker.Position + GetDirection());
             _direction = tracker.Velocity.normalized;

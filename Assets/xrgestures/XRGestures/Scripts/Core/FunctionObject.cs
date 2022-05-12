@@ -19,7 +19,7 @@ namespace XR_Gestures
             => name = this.GetType().Name;
 
 
-        public virtual void OnDebug() { }
+        public virtual void DebugRun() { }
 
         public virtual Output Run(Output res)
         {

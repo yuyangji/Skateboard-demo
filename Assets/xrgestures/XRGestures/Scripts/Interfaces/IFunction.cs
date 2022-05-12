@@ -9,6 +9,6 @@ namespace XR_Gestures
         public void Initialise(FunctionArgs _args);
         public Output Run(Output _res);
 
-        public void OnDebug();
+        public void DebugRun();
     }
 }

@@ -13,7 +13,7 @@ namespace XR_Gestures
     public class FunctionSO : ScriptableObject, IFunction
     {
         [SerializeReference, SubclassSelector] FunctionObject funcObj;
-        public void OnDebug() => funcObj.OnDebug();
+        public void DebugRun() => funcObj.DebugRun();
 
         public void Initialise(FunctionArgs _args) => funcObj.Initialise(_args);
         public Output Run(Output _res) => funcObj.Run(_res);

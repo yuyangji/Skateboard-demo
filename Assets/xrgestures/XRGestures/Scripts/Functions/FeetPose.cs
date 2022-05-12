@@ -34,9 +34,9 @@ namespace XR_Gestures
         [SerializeField] string debugState;
 
 
-        public override void OnDebug()
+        public override void DebugRun()
         {
-            base.OnDebug();
+            base.DebugRun();
             debugState = Function().ToString();
 
         }

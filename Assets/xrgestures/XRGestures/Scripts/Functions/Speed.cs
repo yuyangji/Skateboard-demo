@@ -26,9 +26,9 @@ namespace XR_Gestures
 
         [SerializeField][ReadOnly] float speed;
 
-        public override void OnDebug()
+        public override void DebugRun()
         {
-            base.OnDebug();
+            base.DebugRun();
             speed = tracker.Velocity.magnitude;
         }
 

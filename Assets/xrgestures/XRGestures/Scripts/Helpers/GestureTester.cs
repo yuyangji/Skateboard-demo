@@ -21,7 +21,7 @@ namespace XR_Gestures
         {
             public void Initialise(FunctionArgs _args){}
 
-            public void OnDebug(){}
+            public void DebugRun(){}
 
             public Output Run(Output _res)
             {
@@ -36,7 +36,7 @@ namespace XR_Gestures
               
             }
 
-            public void OnDebug()
+            public void DebugRun()
             {
          
             }

@@ -22,7 +22,9 @@ namespace XR_Gestures.Editors
             listProperty = serializedObject.FindProperty("functions").FindPropertyRelative("functions");
             toggled = true;
 
+
             list = new ReorderableList(serializedObject, listProperty, true, true, true, true);
+
 
             source = (ContinuousGesture) target;
 
@@ -53,14 +55,9 @@ namespace XR_Gestures.Editors
         {
             base.OnInspectorGUI();
             serializedObject.Update(); // Update the array property's representation in the inspector
-            debug = EditorGUILayout.Toggle("Debug", debug);
-            if (debug)
+            if (list.count == 0)
             {
-                source.functions.Debug = true;
-            }
-            else
-            {
-                source.functions.Debug = false;
+                return;
             }
 
             list.DoLayoutList(); // Have the ReorderableList do its work

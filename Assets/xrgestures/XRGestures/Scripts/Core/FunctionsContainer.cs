@@ -23,17 +23,12 @@ namespace XR_Gestures
         //maybe remove later.
         public void DebugRun()
         {
-            Functions.ForEach(f => f.OnDebug());
+            Functions.ForEach(f => f.DebugRun());
 
         }
 
         public Output Run()
         {
-            if (Debug)
-            {
-                DebugRun();
-            }
-
             currentOutput = Output.None;
             foreach (var f in Functions)
             {

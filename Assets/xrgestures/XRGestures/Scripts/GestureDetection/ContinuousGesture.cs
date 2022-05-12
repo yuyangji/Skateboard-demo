@@ -16,18 +16,20 @@ namespace XR_Gestures
         Output currentOutput = Output.None;
 
 
-        [SerializeField] FunctionObject activeFunction;
+        [SerializeReference, SubclassSelector] FunctionObject activeFunction;
 
         //Debugging purposes.
         [ReadOnly]
         [SerializeField]
         public State state;
 
-        bool active;
+        bool wasPerforming;
+
+        [SerializeField] bool RunDebug;
         public override void Reset()
         {
             currentOutput = Output.None;
-            active = false;
+            wasPerforming = false;
         }
         public override void Initialise(XRAvatar _avatar)
         {
@@ -35,33 +37,43 @@ namespace XR_Gestures
             var args = new FunctionArgs(_avatar, _mainTracker);
 
             functions.Initialise(args);
-
+            if (activeFunction != null)
+            {
+                activeFunction.Initialise(args);
+            }
         }
 
         bool IsActive()
         {
-            return activeFunction == null ? false: activeFunction.Run(Output.None).state == State.Performing;
+            return activeFunction == null ? false : activeFunction.Run(Output.None).state == State.Performing;
         }
 
 
         public override State Run()
         {
+            if (RunDebug)
+            {
+                functions.DebugRun();
+            }
+
             currentOutput = functions.Run();
             state = currentOutput.state;
             if (currentOutput.state == State.Performing && currentOutput.session == null)
             {
                 currentOutput.StartSession(_mainTracker);
-                active = true;
+                wasPerforming = true;
             }
             if (currentOutput.state == State.Stopped)
             {
-                if (IsActive())
+                if (wasPerforming && IsActive())
+                {
                     return State.Performing;
+                }
                 else
                 {
                     Reset();
                 }
-                
+
             }
 
 

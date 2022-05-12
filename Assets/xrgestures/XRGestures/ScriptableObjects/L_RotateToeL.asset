@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc5c36a6703524d4e8c5fcc23bd9f567, type: 3}
+  m_Name: L_RotateToeL
+  m_EditorClassIdentifier: 
+  mainTracker: 0
+  concurrentGestures: []
+  functions:
+    Debug: 0
+    functions:
+    - rid: 2325913769719103491
+  activeFunction:
+    rid: 2325913769719103489
+  state: 3
+  RunDebug: 1
+  references:
+    version: 2
+    RefIds:
+    - rid: 2325913769719103489
+      type: {class: FeetPose, ns: XR_Gestures, asm: Assembly-CSharp}
+      data:
+        name: 
+        negate: 0
+        observation: 0
+        leftState: 0
+        rightState: 0
+        debugState: 
+    - rid: 2325913769719103491
+      type: {class: AngularVelocity, ns: XR_Gestures, asm: Assembly-CSharp}
+      data:
+        name: 
+        negate: 0
+        normalizedAngularVelocity: {x: 0, y: 1, z: 0}
+        triggerSpeed: 1
+        correction: 0.124
+        dotProduct: 0

@@ -12,7 +12,7 @@ namespace XR_Gestures
         [Expandable]
         [SerializeField] FunctionSO functionSO;
 
-        public void OnDebug() => functionSO.OnDebug();
+        public void DebugRun() => functionSO.DebugRun();
 
         public void Initialise(FunctionArgs _args) => functionSO.Initialise(_args);
         public Output Run(Output _res) => functionSO.Run(_res);
@@ -26,7 +26,7 @@ namespace XR_Gestures
         [Expandable]
         [SerializeField] PoseSO functionsSO;
 
-        public void OnDebug() => functionsSO.OnDebug();
+        public void DebugRun() => functionsSO.DebugRun();
 
         public void Initialise(FunctionArgs _args) => functionsSO.Initialise(_args);
         public Output Run(Output _res) => functionsSO.Run(_res);

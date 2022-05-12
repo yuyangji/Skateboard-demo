@@ -16,10 +16,10 @@ MonoBehaviour:
     Debug: 1
     functions:
     - name: 
-      negateResult: 0
+      negate: 0
       refMatrix: {fileID: 0}
       refTrackerLabel: 4
       direction: {x: 0.70359665, y: 0.66946906, z: 0.23824954}
       fromLabel: 7
       toLabel: 9
-      tolerance: 0.03
+      tolerance: 0.093

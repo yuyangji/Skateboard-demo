@@ -29,8 +29,8 @@ namespace XR_Gestures
 
         [ReadOnly]
         [SerializeField] State state;
-
-
+        //Run debug on functions.
+        [SerializeField] bool RunDebug;
         public void AddNode()
         {
             functions.Add(new FunctionsContainer());
@@ -83,15 +83,15 @@ namespace XR_Gestures
             return cond;
         }
 
-        [Button]
-        public void RunDebug()
-        {
-            functions.ForEach(f => f.Debug = true);
-        }
 
 
         public override State Run()
         {
+            if (RunDebug)
+            {
+                functions.ForEach(f => f.DebugRun());
+            }
+
             //Prevent executing again when gesture has already performed.
             //Sometimes when gesture cancels/finishes, it can still be in perform state.
             //i.e toe hold.

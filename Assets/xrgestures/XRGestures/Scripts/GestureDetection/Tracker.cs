@@ -21,7 +21,7 @@ namespace XR_Gestures
 
         public float deltaTime { get; protected set; }
 
-        public float angleRotation { get; private set; }
+        public Vector3 AngularVelocity { get; protected set; }
 
         [SerializeField] bool selfAsRef;
         [SerializeField] Transform axisRef;
@@ -31,6 +31,7 @@ namespace XR_Gestures
         {
             axisRef = selfAsRef || axisRef == null ? transform : axisRef;
             StartCoroutine(VelocityUpdate());
+            StartCoroutine(AngularVelocityUpdate());
         }
 
         public void SetReferenceAxis(Transform _refAxis)
@@ -58,6 +59,45 @@ namespace XR_Gestures
 
                 yield return new WaitForSeconds(deltaUpdate);
             }
+        }
+        Vector3 GetAngularVelocity(Quaternion foreLastFrameRotation, Quaternion lastFrameRotation, float deltaTime)
+        {
+            var q = lastFrameRotation * Quaternion.Inverse(foreLastFrameRotation);
+            // no rotation?
+            // You may want to increase this closer to 1 if you want to handle very small rotations.
+            // Beware, if it is too close to one your answer will be Nan
+            if (Mathf.Abs(q.w) > 1023.5f / 1024.0f)
+            {
+                return new Vector3(0, 0, 0);
+            }
+
+            float gain;
+            // handle negatives, we could just flip it but this is faster
+            if (q.w < 0.0f)
+            {
+                var angle = Mathf.Acos(-q.w);
+                gain = -2.0f * angle / (Mathf.Sin(angle) * deltaTime);
+            }
+            else
+            {
+                var angle = Mathf.Acos(q.w);
+                gain = 2.0f * angle / (Mathf.Sin(angle) * deltaTime);
+            }
+            return new Vector3(q.x * gain, q.y * gain, q.z * gain);
+        }
+        IEnumerator AngularVelocityUpdate()
+        {
+            Quaternion prevRotation = Rotation;
+            WaitForSeconds waitForSeconds = new WaitForSeconds(deltaUpdate);
+            yield return waitForSeconds;
+            while (true)
+            {
+                AngularVelocity = GetAngularVelocity(prevRotation, Rotation, deltaUpdate);
+                AngularVelocity = axisRef.InverseTransformDirection(AngularVelocity);
+                prevRotation = Rotation;
+                yield return waitForSeconds;
+            }
+
         }
 
 
