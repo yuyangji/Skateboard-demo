@@ -1248,6 +1248,8 @@ MonoBehaviour:
     - rid: 2325913769719103493
   mainTracker: 0
   state: 0
+  debugger:
+    debugText: 
   references:
     version: 2
     RefIds:
@@ -1269,7 +1271,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   avatar: {fileID: 35428096}
   gesture: {fileID: 11400000, guid: ae513ed45ab12aa4e889b8f296beb8aa, type: 2}
-  state: 0
 --- !u!1 &1672509546
 GameObject:
   m_ObjectHideFlags: 0
@@ -2195,7 +2196,6 @@ GameObject:
   - component: {fileID: 2898603538640977181}
   - component: {fileID: 2898603538640977184}
   - component: {fileID: 2898603538640977185}
-  - component: {fileID: 2898603538640977186}
   m_Layer: 0
   m_Name: XrGestures
   m_TagString: Untagged
@@ -2248,14 +2248,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aac6914f188c7b41a8522bd703227c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Validated:
-    m_PersistentCalls:
-      m_Calls: []
   avatar: {fileID: 35428096}
   gestures:
   - {fileID: 11400000, guid: 01c501c3ebbf047438a044d1271a8fac, type: 2}
   - {fileID: 11400000, guid: 025ef52e9a8ea5648a7613664147ee94, type: 2}
   - {fileID: 11400000, guid: f2d52c66cbf06474b830f1ec23ea5d1d, type: 2}
+  - {fileID: 11400000, guid: aea6f94239f8b6645829f815a0139c51, type: 2}
   PossibleGestures: []
   currentGesture: {fileID: 0}
 --- !u!114 &2898603538640977185
@@ -2274,21 +2272,6 @@ MonoBehaviour:
   rightFoot: {fileID: 2898603538506672237}
   leftFootFollow: {fileID: 1672509547}
   rightFootFollow: {fileID: 927635859}
---- !u!114 &2898603538640977186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2898603538640977168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c5756ddd8e7c9440a9355874f1c0084, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_UserStateMap:
-  - UserState: 0
-    gestures: []
 --- !u!1001 &2898603538974147665
 PrefabInstance:
   m_ObjectHideFlags: 0

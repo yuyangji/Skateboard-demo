@@ -1,4 +1,5 @@
 using NaughtyAttributes;
+using System.Diagnostics;
 using UnityEngine;
 namespace XR_Gestures
 {
@@ -19,28 +20,30 @@ namespace XR_Gestures
         [SerializeReference, SubclassSelector] FunctionObject activeFunction;
 
         //Debugging purposes.
-        [ReadOnly]
-        [SerializeField]
-        public State state;
 
+
+        [SerializeField] float timeToActivate;
+
+        //vars
+        Stopwatch stopWatch;
         bool wasPerforming;
-
-        [SerializeField] bool RunDebug;
         public override void Reset()
         {
             currentOutput = Output.None;
             wasPerforming = false;
+            stopWatch.Reset();
         }
         public override void Initialise(XRAvatar _avatar)
         {
             base.Initialise(_avatar);
-            var args = new FunctionArgs(_avatar, _mainTracker);
+            stopWatch = new Stopwatch();
 
-            functions.Initialise(args);
+            functions.Initialise(data);
             if (activeFunction != null)
             {
-                activeFunction.Initialise(args);
+                activeFunction.Initialise(data);
             }
+            Reset();
         }
 
         bool IsActive()
@@ -48,35 +51,54 @@ namespace XR_Gestures
             return activeFunction == null ? false : activeFunction.Run(Output.None).state == State.Performing;
         }
 
+        State OnPerforming()
+        {
+            if (!stopWatch.IsRunning)
+            {
+                stopWatch.Start();
+                wasPerforming = true;
+                return State.Stopped;
+            }
+            else if (stopWatch.Elapsed.TotalSeconds > timeToActivate)
+            {
+                wasPerforming = true;
+                return State.Performing;
+            }
+            return State.Stopped;
+
+        }
+        State OnStopped()
+        {
+            if (wasPerforming && IsActive())
+            {
+                return State.Performing;
+            }
+            else
+            {
+                Reset();
+                return State.Stopped;
+            }
+        }
 
         public override State Run()
         {
             if (RunDebug)
             {
+                debugger.ClearText();
                 functions.DebugRun();
+
             }
 
             currentOutput = functions.Run();
             state = currentOutput.state;
-            if (currentOutput.state == State.Performing && currentOutput.session == null)
+
+            switch (state)
             {
-                currentOutput.StartSession(_mainTracker);
-                wasPerforming = true;
+                case State.Performing:
+                    return OnPerforming();
+                case State.Stopped:
+                    return OnStopped();
             }
-            if (currentOutput.state == State.Stopped)
-            {
-                if (wasPerforming && IsActive())
-                {
-                    return State.Performing;
-                }
-                else
-                {
-                    Reset();
-                }
-
-            }
-
-
             return state;
         }
 

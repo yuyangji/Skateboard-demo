@@ -1,5 +1,4 @@
 using NaughtyAttributes;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -20,17 +19,12 @@ namespace XR_Gestures
 
         [ReadOnly]
         [SerializeField] State state;
-
         int index;
         public override void Initialise(XRAvatar _avatar)
         {
-            var args = new FunctionArgs()
-            {
-                avatar = _avatar,
-                mainTracker = _avatar.GetTracker(mainTracker)
-            };
-            functions.Initialise(args);
-            activation.Initialise(args);
+            base.Initialise(_avatar);
+            functions.Initialise(data);
+            activation.Initialise(data);
             index = 0;
         }
 
@@ -39,7 +33,7 @@ namespace XR_Gestures
             Output output = activation.Run(Output.None);
             if (output.state != State.Stopped)
             {
-                if(functions.Run().state == State.Performing)
+                if (functions.Run().state == State.Performing)
                 {
                     Reset();
                     return State.Performed;
@@ -59,7 +53,7 @@ namespace XR_Gestures
 
         public override void Reset()
         {
-    
+
             currentOutput = Output.None;
         }
 

@@ -10,42 +10,29 @@ namespace XR_Gestures
     [CreateAssetMenu(fileName = "NewGesture", menuName = "ScriptableObject/Gesture (Time based)")]
     public class TemporalGestureSO : Gesture
     {
+        bool NeverShow => false;
         [ShowIf("NeverShow")]
         [SerializeField] List<FunctionsContainer> functions;
         [SerializeField] DurationMode mode;
 
-        [Tooltip("Previous function must remain true until current is true.")]
+        [InfoBox("Previous function must remain true until current is true.")]
         [SerializeField] bool persistTransition;
-        bool NeverShow => false;
+
         enum DurationMode { before, after }
 
         int currentIdx;
-        bool disabled;
+
         System.Diagnostics.Stopwatch stopWatch = new System.Diagnostics.Stopwatch();
 
         [SerializeField] float duration;
 
         Output currentOutput;
 
-        [ReadOnly]
-        [SerializeField] State state;
-        //Run debug on functions.
-        [SerializeField] bool RunDebug;
-        public void AddNode()
-        {
-            functions.Add(new FunctionsContainer());
-        }
-        public void RemoveNode(int index)
-        {
-            functions.RemoveAt(index);
-        }
-
         public override void Initialise(XRAvatar _avatar)
         {
             base.Initialise(_avatar);
-            var args = new FunctionArgs(_avatar, _mainTracker);
 
-            functions.ForEach(f => f.Initialise(args));
+            functions.ForEach(f => f.Initialise(data));
             Reset();
         }
         public void SetGestures(List<FunctionsContainer> container)
@@ -55,11 +42,9 @@ namespace XR_Gestures
 
         public override void Reset()
         {
-
             currentIdx = 0;
             stopWatch.Reset();
             currentOutput = Output.None;
-            disabled = true;
         }
 
         bool PrevStillTrue() => currentIdx == 0 ?
@@ -69,7 +54,7 @@ namespace XR_Gestures
         void StartTime()
         {
             stopWatch.Restart();
-            currentOutput.StartSession(_mainTracker);
+
         }
         bool TimeExpired()
         {
@@ -89,19 +74,10 @@ namespace XR_Gestures
         {
             if (RunDebug)
             {
+                debugger.ClearText();
                 functions.ForEach(f => f.DebugRun());
-            }
 
-            //Prevent executing again when gesture has already performed.
-            //Sometimes when gesture cancels/finishes, it can still be in perform state.
-            //i.e toe hold.
-            /*        if (disabled)
-                    {
-                        Debug.Log(currentIdx);
-                        if (functions[0].Run(Output.None).state == State.Stopped)
-                            disabled = false;
-                        return Output.None;
-                    }*/
+            }
 
             //Run the current function
             currentOutput = functions[currentIdx].Run();
@@ -114,7 +90,6 @@ namespace XR_Gestures
                 }
                 //If function passes, go to next function
                 currentIdx++;
-                Debug.Log(currentIdx);
                 if (currentIdx >= functions.Count)
                 {
                     Reset();

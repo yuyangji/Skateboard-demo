@@ -14,7 +14,7 @@ namespace XR_Gestures
             functionsSO.DebugRun();
         }
 
-        public void Initialise(FunctionArgs _args) => functionsSO.Initialise(_args);
+        public void Initialise(Dictionary<string, object> _data) => functionsSO.Initialise(_data);
         public Output Run(Output _res) => functionsSO.Run();
 
         public void SetFunctions(List<AlignedInDirection> _fs)

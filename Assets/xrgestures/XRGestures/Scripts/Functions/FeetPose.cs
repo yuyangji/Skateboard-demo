@@ -1,5 +1,6 @@
 using NaughtyAttributes;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace XR_Gestures
@@ -30,24 +31,21 @@ namespace XR_Gestures
 
         Tracker toeL, heelL, toeR, heelR;
 
-        [ReadOnly]
-        [SerializeField] string debugState;
-
-
         public override void DebugRun()
         {
             base.DebugRun();
-            debugState = Function().ToString();
+            debugger.AddValue("FeetState", Function().ToString());
 
         }
 
 
-        public override void Initialise(FunctionArgs _args)
+        public override void Initialise(Dictionary<string, object> _data)
         {
-            toeL = _args.avatar.GetTracker(TrackerLabel.toe_L);
-            heelL = _args.avatar.GetTracker(TrackerLabel.heel_L);
-            toeR = _args.avatar.GetTracker(TrackerLabel.toe_R);
-            heelR = _args.avatar.GetTracker(TrackerLabel.heel_R);
+            base.Initialise(_data);
+            toeL = avatar.GetTracker(TrackerLabel.toe_L);
+            heelL = avatar.GetTracker(TrackerLabel.heel_L);
+            toeR = avatar.GetTracker(TrackerLabel.toe_R);
+            heelR = avatar.GetTracker(TrackerLabel.heel_R);
         }
         protected override bool Function()
         {

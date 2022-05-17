@@ -13,13 +13,20 @@ MonoBehaviour:
   m_Name: R_PanR
   m_EditorClassIdentifier: 
   mainTracker: 1
-  concurrentGestures: []
+  concurrentGestures:
+  - {fileID: 11400000, guid: aea6f94239f8b6645829f815a0139c51, type: 2}
+  RunDebug: 1
+  debugger:
+    debugText: "FeetState\t True\ndirection\t (0.00, 0.00, 0.00)\ndotProduct\t 0"
+  state: 3
   functions:
     Debug: 0
     functions:
     - rid: 2325913575098941440
     - rid: 2325913590711451649
-  state: 3
+  activeFunction:
+    rid: 2325913891659579392
+  timeToActivate: 0.2
   references:
     version: 2
     RefIds:
@@ -27,15 +34,22 @@ MonoBehaviour:
       type: {class: FeetPose, ns: XR_Gestures, asm: Assembly-CSharp}
       data:
         name: 
-        negateResult: 0
+        negate: 0
         observation: 1
         leftState: 1
         rightState: 1
-        debugState: False
     - rid: 2325913590711451649
       type: {class: VelocityDirection, ns: XR_Gestures, asm: Assembly-CSharp}
       data:
         name: 
-        negateResult: 0
+        negate: 0
         correction: 0.1
         direction: {x: 1, y: 0, z: 0}
+    - rid: 2325913891659579392
+      type: {class: FeetPose, ns: XR_Gestures, asm: Assembly-CSharp}
+      data:
+        name: 
+        negate: 0
+        observation: 1
+        leftState: 0
+        rightState: 1

@@ -22,26 +22,18 @@ namespace XR_Gestures
         [AllowNesting]
         [SerializeField] TrackerLabel trackerLabel;
 
-        Tracker tracker;
-
-        [SerializeField][ReadOnly] float speed;
-
         public override void DebugRun()
         {
             base.DebugRun();
-            speed = tracker.Velocity.magnitude;
+            debugger.AddValue("speed", mainTracker.Velocity.magnitude.ToString());
         }
 
-        public override void Initialise(FunctionArgs _args)
-        {
-            tracker = _args.mainTracker;
-        }
         protected override bool Function()
         => mode switch
         {
-            Mode.MoreThan => tracker.Velocity.magnitude >= minSpeed,
-            Mode.LessThan => tracker.Velocity.magnitude < minSpeed,
-            Mode.Between => tracker.Velocity.magnitude >= minSpeed && tracker.Velocity.magnitude <= maxSpeed,
+            Mode.MoreThan => mainTracker.Velocity.magnitude >= minSpeed,
+            Mode.LessThan => mainTracker.Velocity.magnitude < minSpeed,
+            Mode.Between => mainTracker.Velocity.magnitude >= minSpeed && mainTracker.Velocity.magnitude <= maxSpeed,
             _ => false,
         };
 

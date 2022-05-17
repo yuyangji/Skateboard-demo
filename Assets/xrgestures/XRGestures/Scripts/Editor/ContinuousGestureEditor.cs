@@ -10,23 +10,14 @@ namespace XR_Gestures.Editors
     public class ContinuousGestureEditor : NaughtyInspector
     {
         SerializedProperty listProperty;
-        bool toggled = true;
         ReorderableList list;
 
-        bool debug = true;
-
-        ContinuousGesture source;
         protected override void OnEnable()
         {
             base.OnEnable();
             listProperty = serializedObject.FindProperty("functions").FindPropertyRelative("functions");
-            toggled = true;
-
 
             list = new ReorderableList(serializedObject, listProperty, true, true, true, true);
-
-
-            source = (ContinuousGesture) target;
 
             list.drawHeaderCallback = (Rect rect) =>
             {

@@ -1,20 +1,87 @@
+using NaughtyAttributes;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 
 namespace XR_Gestures
 {
+    public static class DataKeyConstants
+    {
+        public const string MainTracker = "MainTracker";
+        public const string Avatar = "Avatar";
+        public const string Debugger = "Debugger";
+
+    }
+
+    [Serializable]
+    public class Debugger
+    {
+        [ResizableTextArea]
+        [AllowNesting]
+        [ReadOnly]
+        public string debugText;
+
+        public void AddText(string text)
+        {
+            if (String.IsNullOrEmpty(debugText))
+            {
+                debugText += $"{text}";
+            }
+            else
+            {
+                debugText += $"\n{text}";
+            }
+        }
+
+        public void AddTitle(string _title)
+        {
+            if (String.IsNullOrEmpty(debugText))
+            {
+                debugText += $"-----{_title}-----\n";
+            }
+            else
+            {
+                debugText += $"\n\n-----{_title}-----\n";
+            }
+        }
+
+
+        public void AddValue(string _name, string _value)
+        {
+            if (String.IsNullOrEmpty(debugText))
+            {
+                debugText += $"{_name}\t {_value}";
+            }
+            else
+            {
+                debugText += $"\n{_name}\t {_value}";
+            }
+
+        }
+        public void ClearText()
+        {
+            debugText = "";
+        }
+    }
 
 
     public abstract class Gesture : ScriptableObject
     {
         [SerializeField] protected TrackerLabel mainTracker;
         [SerializeField] public List<Gesture> concurrentGestures;
-        protected Tracker _mainTracker;
+
+        //DEBUGGING
+        [SerializeField] protected bool RunDebug;
+        [SerializeField] protected Debugger debugger;
+
+        [ReadOnly]
+        [SerializeField]
+        public State state;
 
         //LISTENERS
         readonly List<IGestureListener> listeners = new List<IGestureListener>();
-
+        protected Dictionary<string, object> data;
         public void RegisterListener(IGestureListener listener)
         {
             listeners.Add(listener);
@@ -44,8 +111,11 @@ namespace XR_Gestures
 
         public virtual void Initialise(XRAvatar _avatar)
         {
-
-            _mainTracker = _avatar.GetTracker(mainTracker);
+            data = new Dictionary<string, object>();
+            debugger = new Debugger();
+            data.Add(DataKeyConstants.MainTracker, _avatar.GetTracker(mainTracker));
+            data.Add(DataKeyConstants.Avatar, _avatar);
+            data.Add(DataKeyConstants.Debugger, debugger);
         }
         public abstract void Reset();
     }
@@ -96,7 +166,6 @@ namespace XR_Gestures
         Performed,
         Performing,
         Stopped,
-        ForceStart
     }
 
 }

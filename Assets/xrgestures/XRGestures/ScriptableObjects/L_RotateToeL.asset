@@ -14,14 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainTracker: 0
   concurrentGestures: []
+  RunDebug: 1
+  debugger:
+    debugText: 
+  state: 3
   functions:
     Debug: 0
     functions:
     - rid: 2325913769719103491
   activeFunction:
     rid: 2325913769719103489
-  state: 3
-  RunDebug: 1
+  timeToActivate: 0
   references:
     version: 2
     RefIds:
@@ -33,7 +36,6 @@ MonoBehaviour:
         observation: 0
         leftState: 0
         rightState: 0
-        debugState: 
     - rid: 2325913769719103491
       type: {class: AngularVelocity, ns: XR_Gestures, asm: Assembly-CSharp}
       data:

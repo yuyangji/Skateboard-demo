@@ -1,4 +1,5 @@
 using NaughtyAttributes;
+using System.Collections.Generic;
 using UnityEngine;
 namespace XR_Gestures
 {
@@ -22,10 +23,18 @@ namespace XR_Gestures
         [SerializeField]
         State state;
 
+        [SerializeField] Debugger debugger;
+
+        Dictionary<string, object> data;
         private void Start()
         {
-            FunctionArgs args = new FunctionArgs(avatar, avatar.GetTracker(mainTracker));
-            container.Initialise(args);
+            debugger = new Debugger();
+            data = new Dictionary<string, object>();
+            data.Add(DataKeyConstants.MainTracker, avatar.GetTracker(mainTracker));
+            data.Add(DataKeyConstants.Avatar, avatar);
+            data.Add(DataKeyConstants.Debugger, debugger);
+
+            container.Initialise(data);
 
         }
 

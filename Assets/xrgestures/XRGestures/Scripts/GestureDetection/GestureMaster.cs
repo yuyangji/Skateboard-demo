@@ -2,16 +2,12 @@ using NaughtyAttributes;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace XR_Gestures
 {
 
     public class GestureMaster : MonoBehaviour
     {
-        // --- Editor event 
-        public UnityEvent Validated;
-
 
         [SerializeField] XRAvatar avatar;
         [Expandable]

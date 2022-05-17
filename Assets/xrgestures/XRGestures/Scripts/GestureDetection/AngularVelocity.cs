@@ -14,8 +14,6 @@ namespace XR_Gestures
         [Range(0.05f, 1f)]
         [SerializeField] float correction;
 
-        Tracker _tracker;
-
         [SerializeField] float dotProduct;
         /*        [SerializeField] Vector3 angularVelocity;
                 [SerializeField] Vector3 angularVelocityNormalized;*/
@@ -29,19 +27,16 @@ namespace XR_Gestures
         }
         float CalculateDotProduct()
         {
-            return Vector3.Dot(_tracker.AngularVelocity.normalized, normalizedAngularVelocity);
+            return Vector3.Dot(mainTracker.AngularVelocity.normalized, normalizedAngularVelocity);
         }
         protected override bool Function()
         {
             float res = CalculateDotProduct();
-            return res > 1f - correction && _tracker.AngularVelocity.magnitude > triggerSpeed;
+            return res > 1f - correction && mainTracker.AngularVelocity.magnitude > triggerSpeed;
 
         }
 
-        public override void Initialise(FunctionArgs _args)
-        {
-            _tracker = _args.mainTracker;
-        }
+
     }
 
 }

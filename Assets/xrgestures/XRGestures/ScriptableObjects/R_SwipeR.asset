@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1e4a29ff61ebb64098680ed1cce2ccc, type: 3}
   m_Name: R_SwipeR
   m_EditorClassIdentifier: 
-  mainTracker: 0
+  mainTracker: 1
   concurrentGestures: []
+  RunDebug: 1
+  debugger:
+    debugText: "FeetState\t True\ndirection\t (0.00, 0.00, 0.00)\ndotProduct\t 0\nspeed\t
+      0\ndirection\t (0.00, 0.00, 0.00)\ndotProduct\t 0\nspeed\t 0"
+  state: 3
   functions:
   - Debug: 0
     functions:
@@ -23,13 +28,12 @@ MonoBehaviour:
     functions:
     - rid: 2325913733803802628
     - rid: 2325913750912106496
-  - Debug: 0
+  - Debug: 1
     functions:
-    - rid: 2325913733803802629
+    - rid: 2325913891659579393
   mode: 0
   persistTransition: 1
   duration: 10
-  state: 3
   references:
     version: 2
     RefIds:
@@ -41,7 +45,6 @@ MonoBehaviour:
         observation: 1
         leftState: 1
         rightState: 1
-        debugState: True
     - rid: 2325913733803802626
       type: {class: VelocityDirection, ns: XR_Gestures, asm: Assembly-CSharp}
       data:
@@ -54,23 +57,11 @@ MonoBehaviour:
       data:
         name: 
         negate: 0
-        minSpeed: 0
+        minSpeed: 2.8
         maxSpeed: 0
         mode: 0
         customTracker: 0
         trackerLabel: 0
-        speed: 2.81
-    - rid: 2325913733803802629
-      type: {class: Speed, ns: XR_Gestures, asm: Assembly-CSharp}
-      data:
-        name: 
-        negate: 0
-        minSpeed: 0
-        maxSpeed: 0
-        mode: 1
-        customTracker: 0
-        trackerLabel: 0
-        speed: 0
     - rid: 2325913750912106496
       type: {class: VelocityDirection, ns: XR_Gestures, asm: Assembly-CSharp}
       data:
@@ -78,3 +69,13 @@ MonoBehaviour:
         negate: 0
         correction: 0.1
         direction: {x: 1, y: 0, z: 0}
+    - rid: 2325913891659579393
+      type: {class: Speed, ns: XR_Gestures, asm: Assembly-CSharp}
+      data:
+        name: 
+        negate: 0
+        minSpeed: 1
+        maxSpeed: 0
+        mode: 1
+        customTracker: 0
+        trackerLabel: 0

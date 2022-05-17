@@ -1,6 +1,6 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
-using NaughtyAttributes;
 namespace XR_Gestures
 {
     [Serializable]
@@ -10,30 +10,33 @@ namespace XR_Gestures
 
         [SerializeField] Vector3 direction;
 
-        [SerializeField][ReadOnly] Vector3 _direction;
-        [SerializeField][ReadOnly] float dotProduct;
-
-        Tracker tracker;
-
-        public override void Initialise(FunctionArgs _args)
+        public override void Initialise(Dictionary<string, object> _data)
         {
-            tracker = _args.mainTracker;
+            base.Initialise(_data);
             direction = direction.normalized;
         }
 
         public override void DebugRun()
         {
-            Debug.DrawLine(tracker.Position, tracker.Position + GetDirection());
-            _direction = tracker.Velocity.normalized;
-            dotProduct = Vector3.Dot(tracker.Velocity.normalized, direction);
+            Debug.DrawLine(mainTracker.Position, mainTracker.Position + GetDirection());
+
+            debugger.AddValue("direction", mainTracker.Velocity.normalized.ToString());
+            debugger.AddValue("dotProduct", DotProduct().ToString());
+
             // Debug.Log(tracker.Velocity);
         }
 
+        float DotProduct()
+        {
+            return Vector3.Dot(mainTracker.Velocity.normalized, direction);
+        }
+
+
         protected Vector3 GetDirection()
-        => tracker.TransformToRefDir(direction).normalized;
+        => mainTracker.TransformToRefDir(direction).normalized;
         protected override bool Function()
         {
-            float res = Vector3.Dot(tracker.Velocity.normalized, direction);
+            float res = Vector3.Dot(mainTracker.Velocity.normalized, direction);
 
             return res >= 1f - correction;
         }

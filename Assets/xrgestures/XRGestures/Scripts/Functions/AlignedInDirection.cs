@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace XR_Gestures
@@ -29,13 +30,14 @@ namespace XR_Gestures
             return refMatrix.InverseTransformDirection((to.Position - from.Position).normalized).normalized;
         }
 
-        public override void Initialise(FunctionArgs _args)
+        public override void Initialise(Dictionary<string, object> _data)
         {
-            from = _args.avatar.GetTracker(fromLabel);
-            to = _args.avatar.GetTracker(toLabel);
+            base.Initialise(_data);
+            from = avatar.GetTracker(fromLabel);
+            to = avatar.GetTracker(toLabel);
             if (refMatrix == null)
             {
-                refMatrix = _args.avatar.GetTracker(refTrackerLabel).transform;
+                refMatrix = avatar.GetTracker(refTrackerLabel).transform;
             }
         }
 

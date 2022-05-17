@@ -1,9 +1,7 @@
-using System.Collections;
+using NaughtyAttributes;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using NaughtyAttributes;
-using System.Linq;
 
 namespace XR_Gestures
 {
@@ -17,7 +15,11 @@ namespace XR_Gestures
         [Button("Create")]
         public void CreateMyAsset()
         {
-            if (directions == null) return;
+            if (directions == null)
+            {
+                return;
+            }
+
             SetDirections();
 
             PoseSO asset = ScriptableObject.CreateInstance<PoseSO>();
@@ -32,9 +34,11 @@ namespace XR_Gestures
         }
         void SetDirections()
         {
-            FunctionArgs args = new FunctionArgs(avatar, null);
-            directions.ForEach(f => {
-                f.Initialise(args);
+            Dictionary<string, object> data = new Dictionary<string, object>();
+            data.Add(DataKeyConstants.Avatar, avatar);
+            directions.ForEach(f =>
+            {
+                f.Initialise(data);
                 f.direction = f.GetCurrentDir();
             });
         }

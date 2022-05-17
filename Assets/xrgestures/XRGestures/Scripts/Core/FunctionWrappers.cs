@@ -14,7 +14,7 @@ namespace XR_Gestures
 
         public void DebugRun() => functionSO.DebugRun();
 
-        public void Initialise(FunctionArgs _args) => functionSO.Initialise(_args);
+        public void Initialise(Dictionary<string, object> _args) => functionSO.Initialise(_args);
         public Output Run(Output _res) => functionSO.Run(_res);
 
     }
@@ -28,7 +28,7 @@ namespace XR_Gestures
 
         public void DebugRun() => functionsSO.DebugRun();
 
-        public void Initialise(FunctionArgs _args) => functionsSO.Initialise(_args);
+        public void Initialise(Dictionary<string, object> _args) => functionsSO.Initialise(_args);
         public Output Run(Output _res) => functionsSO.Run(_res);
 
         public void SetFunctions(List<AlignedInDirection> _fs)

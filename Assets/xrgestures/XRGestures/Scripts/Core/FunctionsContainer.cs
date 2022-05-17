@@ -12,18 +12,24 @@ namespace XR_Gestures
         [SerializeField] public bool Debug;
         [SerializeField] List<T> functions;
         Output currentOutput;
-
+        Debugger debugger;
         protected virtual List<T> Functions { get => functions; set => functions = value; }
 
-        public void Initialise(FunctionArgs args)
+        public void Initialise(Dictionary<string, object> _data)
         {
-            Functions.ForEach(f => f.Initialise(args));
+            Functions.ForEach(f => f.Initialise(_data));
+            debugger = (Debugger) _data[DataKeyConstants.Debugger];
         }
 
         //maybe remove later.
         public void DebugRun()
         {
-            Functions.ForEach(f => f.DebugRun());
+            Functions.ForEach(f =>
+            {
+                debugger.AddTitle(f.GetType().Name);
+                f.DebugRun();
+
+            });
 
         }
 

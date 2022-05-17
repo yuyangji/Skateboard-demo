@@ -7,11 +7,6 @@ namespace XR_Gestures
 
         public float maxDistance;
 
-        Tracker mainTracker;
-        public override void Initialise(FunctionArgs _args)
-        {
-            mainTracker = _args.mainTracker;
-        }
         public override Output Run(Output res)
         {
             session = res.session;

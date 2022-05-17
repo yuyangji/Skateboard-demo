@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 namespace XR_Gestures
 {
@@ -12,6 +13,9 @@ namespace XR_Gestures
         //NOT condition.
         [SerializeField] bool negate;
 
+        protected Tracker mainTracker;
+        protected XRAvatar avatar;
+        protected Debugger debugger;
         public void OnAfterDeserialize()
             => name = this.GetType().Name;
 
@@ -19,7 +23,13 @@ namespace XR_Gestures
             => name = this.GetType().Name;
 
 
-        public virtual void DebugRun() { }
+        public virtual void DebugRun()
+        {
+            if (debugger == null)
+            {
+                return;
+            }
+        }
 
         public virtual Output Run(Output res)
         {
@@ -41,17 +51,12 @@ namespace XR_Gestures
 
         protected abstract bool Function();
 
-        public abstract void Initialise(FunctionArgs _args);
+        public virtual void Initialise(Dictionary<string, object> _data)
+        {
+            mainTracker = (Tracker) _data[DataKeyConstants.MainTracker];
+            avatar = (XRAvatar) _data[DataKeyConstants.Avatar];
+            debugger = (Debugger) _data[DataKeyConstants.Debugger];
+        }
     }
 
-
-
-    public struct FunctionArgs
-    {
-        public XRAvatar avatar;
-        public Tracker mainTracker;
-
-        public FunctionArgs(XRAvatar _avatar, Tracker _tracker) => (avatar, mainTracker) = (_avatar, _tracker);
-
-    }
 }

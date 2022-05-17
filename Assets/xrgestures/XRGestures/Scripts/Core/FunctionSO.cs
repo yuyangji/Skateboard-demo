@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,7 +14,7 @@ namespace XR_Gestures
         [SerializeReference, SubclassSelector] FunctionObject funcObj;
         public void DebugRun() => funcObj.DebugRun();
 
-        public void Initialise(FunctionArgs _args) => funcObj.Initialise(_args);
+        public void Initialise(Dictionary<string, object> _args) => funcObj.Initialise(_args);
         public Output Run(Output _res) => funcObj.Run(_res);
     }
 
