@@ -50,51 +50,15 @@ namespace XR_Gestures.Editors
         {
             base.OnInspectorGUI();
             serializedObject.Update(); // Update the array property's representation in the inspector
-
+            if (list.count == 0)
+            {
+                return;
+            }
             list.DoLayoutList(); // Have the ReorderableList do its work
 
             // We need to call this so that changes on the Inspector are saved by Unity.
             serializedObject.ApplyModifiedProperties();
         }
-        /* public override void OnInspectorGUI()
-         {
-             base.OnInspectorGUI();
-             serializedObject.Update();
 
-             var temporalGesture = (TemporalGestureSO) target;
-
-
-             if (GUILayout.Button("Debug", GUILayout.Width(100)))
-             {
-
-             }
-
-             EditorGUILayout.Space();
-
-
-             //Draw the list without messy foldouts.
-             for (int i = 0; i < listProperty.arraySize; i++)
-             {
-                 SerializedProperty elementRef = listProperty.GetArrayElementAtIndex(i);
-                 SerializedProperty list = elementRef.FindPropertyRelative("functions");
-                 EditorGUILayout.PropertyField(list, new GUIContent("Node " + i.ToString()), true);
-                 if (GUILayout.Button("Remove node", GUILayout.Width(100)))
-                 {
-                     temporalGesture.RemoveNode(i);
-                 }
-
-
-             }
-
-             EditorGUILayout.Space();
-
-             if (GUILayout.Button("Add Node", GUILayout.Width(100)))
-             {
-                 temporalGesture.AddNode();
-             }
-
-             // Apply modfications to properties
-             serializedObject.ApplyModifiedProperties();
-         }*/
     }
 }

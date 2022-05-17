@@ -15,15 +15,23 @@ MonoBehaviour:
   mainTracker: 1
   concurrentGestures:
   - {fileID: 11400000, guid: 025ef52e9a8ea5648a7613664147ee94, type: 2}
+  RunDebug: 0
+  debugger:
+    debugText: 
+  state: 3
   functions:
     Debug: 1
     functions:
     - rid: 2325913575098941440
     - rid: 2325913590711451648
-  state: 3
+  activeFunction:
+    rid: -2
+  timeToActivate: 0.2
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 2325913575098941440
       type: {class: FeetPose, ns: XR_Gestures, asm: Assembly-CSharp}
       data:
@@ -32,7 +40,6 @@ MonoBehaviour:
         observation: 1
         leftState: 1
         rightState: 1
-        debugState: 
     - rid: 2325913590711451648
       type: {class: VelocityDirection, ns: XR_Gestures, asm: Assembly-CSharp}
       data:

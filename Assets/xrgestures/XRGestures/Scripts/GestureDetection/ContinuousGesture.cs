@@ -10,7 +10,7 @@ namespace XR_Gestures
         [HorizontalLine]
 
         [ShowIf("NeverShow")]
-        [SerializeField] public FunctionsContainer functions;
+        [SerializeField] public FunctionsContainer functions = new FunctionsContainer();
 
         bool NeverShow => false;
 
@@ -27,7 +27,9 @@ namespace XR_Gestures
         //vars
         Stopwatch stopWatch;
         bool wasPerforming;
-        public override void Reset()
+
+
+        public override void ResetFunction()
         {
             currentOutput = Output.None;
             wasPerforming = false;
@@ -43,7 +45,7 @@ namespace XR_Gestures
             {
                 activeFunction.Initialise(data);
             }
-            Reset();
+            ResetFunction();
         }
 
         bool IsActive()
@@ -75,7 +77,7 @@ namespace XR_Gestures
             }
             else
             {
-                Reset();
+                ResetFunction();
                 return State.Stopped;
             }
         }

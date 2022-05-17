@@ -12,7 +12,7 @@ namespace XR_Gestures
     {
         bool NeverShow => false;
         [ShowIf("NeverShow")]
-        [SerializeField] List<FunctionsContainer> functions;
+        [SerializeField] List<FunctionsContainer> functions = new List<FunctionsContainer>();
         [SerializeField] DurationMode mode;
 
         [InfoBox("Previous function must remain true until current is true.")]
@@ -28,19 +28,31 @@ namespace XR_Gestures
 
         Output currentOutput;
 
+        private void Awake()
+        {
+            functions.Add(new FunctionsContainer());
+        }
+        private void OnValidate()
+        {
+            if (functions.Count == 0)
+            {
+                functions.Add(new FunctionsContainer());
+            }
+        }
+
         public override void Initialise(XRAvatar _avatar)
         {
             base.Initialise(_avatar);
 
             functions.ForEach(f => f.Initialise(data));
-            Reset();
+            ResetFunction();
         }
         public void SetGestures(List<FunctionsContainer> container)
         {
             functions = container;
         }
 
-        public override void Reset()
+        public override void ResetFunction()
         {
             currentIdx = 0;
             stopWatch.Reset();
@@ -92,7 +104,7 @@ namespace XR_Gestures
                 currentIdx++;
                 if (currentIdx >= functions.Count)
                 {
-                    Reset();
+                    ResetFunction();
 
                     state = State.Performed;
                     return state;
@@ -105,7 +117,7 @@ namespace XR_Gestures
                 //Since gesture can still be transitioning to next state.
                 if (persistTransition && !PrevStillTrue() || TimeExpired() || currentIdx == 0)
                 {
-                    Reset();
+                    ResetFunction();
                 }
             }
 

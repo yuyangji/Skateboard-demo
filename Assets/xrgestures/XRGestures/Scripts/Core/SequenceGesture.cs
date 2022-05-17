@@ -35,14 +35,14 @@ namespace XR_Gestures
             {
                 if (functions.Run().state == State.Performing)
                 {
-                    Reset();
+                    ResetFunction();
                     return State.Performed;
                 }
 
             }
             else
             {
-                Reset();
+                ResetFunction();
             }
 
             state = currentOutput.state;
@@ -51,7 +51,7 @@ namespace XR_Gestures
 
 
 
-        public override void Reset()
+        public override void ResetFunction()
         {
 
             currentOutput = Output.None;

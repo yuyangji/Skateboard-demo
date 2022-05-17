@@ -117,7 +117,7 @@ namespace XR_Gestures
             data.Add(DataKeyConstants.Avatar, _avatar);
             data.Add(DataKeyConstants.Debugger, debugger);
         }
-        public abstract void Reset();
+        public abstract void ResetFunction();
     }
 
 

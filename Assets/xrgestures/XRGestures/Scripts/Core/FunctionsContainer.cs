@@ -60,6 +60,12 @@ namespace XR_Gestures
 
         [SerializeReference, SubclassSelector] List<IFunction> functions;
 
+        public FunctionsContainer()
+        {
+            functions = new List<IFunction>();
+            functions.Add(new FeetPose());
+        }
+
         protected override List<IFunction> Functions { get => functions; set => functions = value; }
 
 

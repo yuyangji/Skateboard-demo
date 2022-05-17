@@ -1,8 +1,7 @@
-using System.Collections;
+using NaughtyAttributes;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
-using NaughtyAttributes;
 namespace XR_Gestures
 {
     [CreateAssetMenu(fileName = "NewGesture", menuName = "ScriptableObject/Gesture (Repeating)")]
@@ -22,11 +21,11 @@ namespace XR_Gestures
             base.Initialise(_avatar);
             gestures.ForEach(gesture => gesture.Initialise(_avatar));
         }
-        public override void Reset()
+        public override void ResetFunction()
         {
             currentIdx = 0;
             timer.Reset();
-            gestures.ForEach(_gesture => _gesture.Reset());
+            gestures.ForEach(_gesture => _gesture.ResetFunction());
         }
 
         bool TimeExpired()
@@ -36,10 +35,10 @@ namespace XR_Gestures
 
         public override State Run()
         {
-           State? result = null;
-           for(int i = 0; i < gestures.Count; i++)
-           {
-                if(currentIdx == i)
+            State? result = null;
+            for (int i = 0; i < gestures.Count; i++)
+            {
+                if (currentIdx == i)
                 {
                     result = gestures[i].Run();
 
@@ -47,13 +46,13 @@ namespace XR_Gestures
                 else
                 {
                     gestures[i].Run();
-                }           
-           }
-           if(result == State.Performed)
+                }
+            }
+            if (result == State.Performed)
             {
-                if(currentIdx == gestures.Count - 1)
+                if (currentIdx == gestures.Count - 1)
                 {
-                    Reset();
+                    ResetFunction();
                     timer.Start();
                 }
                 else
@@ -62,13 +61,13 @@ namespace XR_Gestures
                 }
 
             }
-      
 
-           if(timer.IsRunning)
+
+            if (timer.IsRunning)
             {
                 if (TimeExpired())
                 {
-                    Reset();
+                    ResetFunction();
                     return State.Stopped;
                 }
                 return State.Performing;
