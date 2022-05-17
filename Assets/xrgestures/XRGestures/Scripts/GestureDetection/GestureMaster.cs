@@ -27,6 +27,12 @@ namespace XR_Gestures
         //Handle simulatenous Gestures
         Dictionary<Gesture, List<Gesture>> concurrentGesturesDict;
         List<Gesture> concurrentGestures;
+
+        //Debugging vars
+        int executedCount = 0;
+        int performCount = 0;
+        int executeCount = 0;
+        int stoppedCount = 0;
         private void Awake()
         {
             concurrentGesturesDict = new Dictionary<Gesture, List<Gesture>>();
@@ -113,7 +119,7 @@ namespace XR_Gestures
 
         void PerformGesture(Gesture _gesture)
         {
-            Debug.Log("Executed " + _gesture.ToString());
+            Debug.Log($"{executedCount++} Executed {_gesture}");
             _gesture.RaiseEvent();
         }
 
@@ -124,7 +130,7 @@ namespace XR_Gestures
                             return;
                         else prevGesture = null;
             */
-
+            Debug.Log($"{performCount++} Performing {_gesture}");
             currentGesture = _gesture;
             OnGestureSelected?.Invoke(this, currentGesture);
             currentGesture.RaiseEvent();
@@ -152,14 +158,14 @@ namespace XR_Gestures
             //If performed, then gesture is done. 
             if (res == State.Performed)
             {
-                Debug.Log("Executed " + currentGesture.ToString());
+                Debug.Log($"{executeCount++} Executed {currentGesture}");
                 StopGesture();
             }
             //If cancelled, or no longer activated, then gesture is done.
             else if (res == State.Stopped)
             {
 
-                Debug.Log("Stopped " + currentGesture.ToString());
+                Debug.Log($"{stoppedCount} Stopped {currentGesture}");
                 StopGesture();
 
 

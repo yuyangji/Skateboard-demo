@@ -16,8 +16,10 @@ MonoBehaviour:
   concurrentGestures: []
   RunDebug: 1
   debugger:
-    debugText: "FeetState\t True\ndirection\t (0.00, 0.00, 0.00)\ndotProduct\t 0\nspeed\t
-      0\ndirection\t (0.00, 0.00, 0.00)\ndotProduct\t 0\nspeed\t 0"
+    debugText: "-----FeetPose-----\n\nFeetState\t False\n\n-----VelocityDirection-----\n\ndirection\t
+      (0.00, 0.00, 0.00)\ndotProduct\t 0\n\n-----Speed-----\n\nspeed\t 0\n\n-----VelocityDirection-----\n\ndirection\t
+      (0.00, 0.00, 0.00)\ndotProduct\t 0\n\n-----Speed-----\n\nspeed\t 0\n\n-----FeetPose-----\n\nFeetState\t
+      False\n\n-----Speed-----\n\nspeed\t 0"
   state: 3
   functions:
   - Debug: 0
@@ -31,6 +33,10 @@ MonoBehaviour:
   - Debug: 1
     functions:
     - rid: 2325913891659579393
+  - Debug: 0
+    functions:
+    - rid: 2325913894222561282
+    - rid: 2325913894222561283
   mode: 0
   persistTransition: 1
   duration: 10
@@ -57,7 +63,7 @@ MonoBehaviour:
       data:
         name: 
         negate: 0
-        minSpeed: 2.8
+        minSpeed: 2
         maxSpeed: 0
         mode: 0
         customTracker: 0
@@ -75,6 +81,24 @@ MonoBehaviour:
         name: 
         negate: 0
         minSpeed: 1
+        maxSpeed: 0
+        mode: 1
+        customTracker: 0
+        trackerLabel: 0
+    - rid: 2325913894222561282
+      type: {class: FeetPose, ns: XR_Gestures, asm: Assembly-CSharp}
+      data:
+        name: 
+        negate: 0
+        observation: 1
+        leftState: 0
+        rightState: 1
+    - rid: 2325913894222561283
+      type: {class: Speed, ns: XR_Gestures, asm: Assembly-CSharp}
+      data:
+        name: 
+        negate: 0
+        minSpeed: 2
         maxSpeed: 0
         mode: 1
         customTracker: 0

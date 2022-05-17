@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 static class Extensions
@@ -13,14 +11,33 @@ static class Extensions
 
 
         return new Vector3(
-            (float)System.Math.Round(vector3.x, 3),
-          (float)System.Math.Round(vector3.y, 3),
-           (float)System.Math.Round(vector3.z, 3));
+            (float) System.Math.Round(vector3.x, 3),
+          (float) System.Math.Round(vector3.y, 3),
+           (float) System.Math.Round(vector3.z, 3));
     }
 
     public static Vector3 ReplaceY(this Vector3 _vector3, float y)
     {
         return new Vector3(_vector3.x, y, _vector3.z);
+    }
+
+    public static Vector3 ReplaceXY(this Vector3 _vector3, float x, float y)
+    {
+        return new Vector3(x, y, _vector3.z);
+    }
+
+    public static Vector3 AddXY(this Vector3 _vector3, float x, float y)
+    {
+        return new Vector3(_vector3.x + x, _vector3.y + y, _vector3.z);
+    }
+
+    public static Vector3 AddXZ(this Vector3 _vector3, float x, float z)
+    {
+        return new Vector3(_vector3.x + x, _vector3.y, _vector3.z + z);
+    }
+    public static Vector3 AddXYZ(this Vector3 _vector3, float x, float y, float z)
+    {
+        return new Vector3(_vector3.x + x, _vector3.y + y, _vector3.z + z);
     }
 
     public static Vector3 AddY(this Vector3 _vector3, float y)

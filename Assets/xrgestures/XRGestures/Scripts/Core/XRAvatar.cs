@@ -1,9 +1,8 @@
-using System;
-
-using System.Collections.Generic;
-using UnityEngine;
-using System.Linq;
 using NaughtyAttributes;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 namespace XR_Gestures
 {
@@ -58,8 +57,14 @@ namespace XR_Gestures
         //The transform that will determine which way is forward.
         [SerializeField] Transform rootReference;
 
+        [SerializeField] bool alwaysDrawGizmos;
+
         private void OnValidate()
-        {   
+        {
+            if (trackers == null)
+            {
+                trackers = new List<TrackerLink>();
+            }
             //Get all TrackerLabel enum values and use it create trackerLink class.
             Enum.GetValues(typeof(TrackerLabel))
                 .OfType<TrackerLabel>()
@@ -85,20 +90,37 @@ namespace XR_Gestures
         public Tracker GetTracker(TrackerLabel _label)
         => _trackersDict[_label];
 
-        //Draw gizmo of markers in the scene
-        private void OnDrawGizmosSelected()
+        private void OnDrawGizmos()
         {
-            if (trackers == null) return;
+            if (alwaysDrawGizmos)
+            {
+                DrawGizmos();
+            }
+
+        }
+
+        void DrawGizmos()
+        {
+            if (trackers == null)
+            {
+                return;
+            }
+
             trackers.ForEach(t =>
             {
                 if (t.tracker != null)
                 {
                     Gizmos.color = Color.green;
                     Gizmos.DrawWireSphere(t.tracker.Position, 0.025f);
-               
+
                     UnityEditor.Handles.Label(t.tracker.Position, t.name, textStyle);
                 }
             });
+        }
+        //Draw gizmo of markers in the scene
+        private void OnDrawGizmosSelected()
+        {
+            DrawGizmos();
         }
         [Button("Refresh")]
         public void Refresh()
@@ -121,12 +143,16 @@ namespace XR_Gestures
         public Transform GetRootReference() => rootReference;
         public void OnBeforeSerialize()
         {
-           
+
         }
 
         public void OnAfterDeserialize()
         {
-            if(_trackersDict == null) _trackersDict = new Dictionary<TrackerLabel, Tracker>();
+            if (_trackersDict == null)
+            {
+                _trackersDict = new Dictionary<TrackerLabel, Tracker>();
+            }
+
             trackers.ForEach(t => _trackersDict[t.label] = t.tracker);
         }
     }
