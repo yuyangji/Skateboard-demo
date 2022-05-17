@@ -14,25 +14,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainTracker: 0
   concurrentGestures: []
-  RunDebug: 0
+  RunDebug: 1
   debugger:
-    debugText: 
-  state: 0
+    debugText: "-----FeetPose-----\n\nFeetState\t False\n\n-----FeetPose-----\n\nFeetState\t
+      False\n\n-----FeetPose-----\n\nFeetState\t False\n\n-----FeetPose-----\n\nFeetState\t
+      False"
+  state: 3
   functions:
   - Debug: 0
     functions:
-    - rid: 2325913891659579396
+    - rid: 2325913891659579397
+    - rid: 2325913891659579399
+  - Debug: 0
+    functions:
+    - rid: 2325913891659579400
+    - rid: 2325913891659579401
   mode: 0
   persistTransition: 0
-  duration: 0
+  duration: 3
   references:
     version: 2
     RefIds:
-    - rid: 2325913891659579396
+    - rid: 2325913891659579397
       type: {class: FeetPose, ns: XR_Gestures, asm: Assembly-CSharp}
       data:
         name: 
         negate: 0
-        observation: 0
-        leftState: 0
-        rightState: 0
+        observation: 2
+        leftState: 3
+        rightState: 3
+    - rid: 2325913891659579399
+      type: {class: FeetPose, ns: XR_Gestures, asm: Assembly-CSharp}
+      data:
+        name: 
+        negate: 0
+        observation: 2
+        leftState: 3
+        rightState: 3
+    - rid: 2325913891659579400
+      type: {class: FeetPose, ns: XR_Gestures, asm: Assembly-CSharp}
+      data:
+        name: 
+        negate: 1
+        observation: 2
+        leftState: 3
+        rightState: 3
+    - rid: 2325913891659579401
+      type: {class: FeetPose, ns: XR_Gestures, asm: Assembly-CSharp}
+      data:
+        name: 
+        negate: 1
+        observation: 2
+        leftState: 3
+        rightState: 3

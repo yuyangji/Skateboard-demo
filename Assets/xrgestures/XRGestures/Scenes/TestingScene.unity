@@ -2254,6 +2254,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 025ef52e9a8ea5648a7613664147ee94, type: 2}
   - {fileID: 11400000, guid: f2d52c66cbf06474b830f1ec23ea5d1d, type: 2}
   - {fileID: 11400000, guid: aea6f94239f8b6645829f815a0139c51, type: 2}
+  - {fileID: 11400000, guid: da088086f47073c4c8c7cbf6454de69e, type: 2}
   PossibleGestures: []
   currentGesture: {fileID: 0}
 --- !u!114 &2898603538640977185
